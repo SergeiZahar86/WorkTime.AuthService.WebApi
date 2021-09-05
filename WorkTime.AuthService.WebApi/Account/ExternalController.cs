@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using WorkTime.AuthSerice.Data.Models;
 
 namespace WorkTime.AuthService.WebApi.Account
 {
@@ -21,16 +22,40 @@ namespace WorkTime.AuthService.WebApi.Account
     [AllowAnonymous]
     public class ExternalController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        //private readonly UserManager<IdentityUser> _userManager;
+        //private readonly SignInManager<IdentityUser> _signInManager;
+        //private readonly IIdentityServerInteractionService _interaction;
+        //private readonly IClientStore _clientStore;
+        //private readonly IEventService _events;
+        //private readonly ILogger<ExternalController> _logger;
+
+        //public ExternalController(
+        //    UserManager<IdentityUser> userManager,
+        //    SignInManager<IdentityUser> signInManager,
+        //    IIdentityServerInteractionService interaction,
+        //    IClientStore clientStore,
+        //    IEventService events,
+        //    ILogger<ExternalController> logger)
+        //{
+        //    _userManager = userManager;
+        //    _signInManager = signInManager;
+        //    _interaction = interaction;
+        //    _clientStore = clientStore;
+        //    _events = events;
+        //    _logger = logger;
+        //}
+
+
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IClientStore _clientStore;
         private readonly IEventService _events;
         private readonly ILogger<ExternalController> _logger;
 
         public ExternalController(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<AppUser> userManager,
+            SignInManager<AppUser> signInManager,
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
             IEventService events,
@@ -43,6 +68,7 @@ namespace WorkTime.AuthService.WebApi.Account
             _events = events;
             _logger = logger;
         }
+
 
         /// <summary>
         /// initiate roundtrip to external authentication provider
@@ -115,9 +141,9 @@ namespace WorkTime.AuthService.WebApi.Account
             // it doesn't expose an API to issue additional claims from the login workflow
             var principal = await _signInManager.CreateUserPrincipalAsync(user);
             additionalLocalClaims.AddRange(principal.Claims);
-            var name = principal.FindFirst(JwtClaimTypes.Name)?.Value ?? user.Id;
+            var name = principal.FindFirst(JwtClaimTypes.Name)?.Value ?? user.Id.ToString();
 
-            var isuser = new IdentityServerUser(user.Id)
+            var isuser = new IdentityServerUser(user.Id.ToString())
             {
                 DisplayName = name,
                 IdentityProvider = provider,
@@ -134,7 +160,7 @@ namespace WorkTime.AuthService.WebApi.Account
 
             // check if external login is in the context of an OIDC request
             var context = await _interaction.GetAuthorizationContextAsync(returnUrl);
-            await _events.RaiseAsync(new UserLoginSuccessEvent(provider, providerUserId, user.Id, name, true, context?.Client.ClientId));
+            await _events.RaiseAsync(new UserLoginSuccessEvent(provider, providerUserId, user.Id.ToString(), name, true, context?.Client.ClientId));
 
             if (context != null)
             {
@@ -149,7 +175,7 @@ namespace WorkTime.AuthService.WebApi.Account
             return Redirect(returnUrl);
         }
 
-        private async Task<(IdentityUser user, string provider, string providerUserId, IEnumerable<Claim> claims)>
+        private async Task<(AppUser user, string provider, string providerUserId, IEnumerable<Claim> claims)>
             FindUserFromExternalProviderAsync(AuthenticateResult result)
         {
             var externalUser = result.Principal;
@@ -174,7 +200,7 @@ namespace WorkTime.AuthService.WebApi.Account
             return (user, provider, providerUserId, claims);
         }
 
-        private async Task<IdentityUser> AutoProvisionUserAsync(string provider, string providerUserId, IEnumerable<Claim> claims)
+        private async Task<AppUser> AutoProvisionUserAsync(string provider, string providerUserId, IEnumerable<Claim> claims)
         {
             // create a list of claims that we want to transfer into our store
             var filtered = new List<Claim>();
@@ -214,7 +240,7 @@ namespace WorkTime.AuthService.WebApi.Account
                 filtered.Add(new Claim(JwtClaimTypes.Email, email));
             }
 
-            var user = new IdentityUser
+            var user = new AppUser
             {
                 UserName = Guid.NewGuid().ToString(),
             };

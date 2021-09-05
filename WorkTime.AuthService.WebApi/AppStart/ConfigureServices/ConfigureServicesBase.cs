@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WorkTime.AuthSerice.Data;
+using WorkTime.AuthSerice.Data.Models;
 
 namespace WorkTime.AuthService.WebApi.AppStart.ConfigureServices
 {
@@ -21,7 +22,8 @@ namespace WorkTime.AuthService.WebApi.AppStart.ConfigureServices
                 config.UseSqlServer(configuration.GetConnectionString(nameof(ApplicationDbContext)));
             })
 
-                .AddIdentity<IdentityUser, IdentityRole>(config =>
+                //.AddIdentity<IdentityUser, IdentityRole>(config =>
+                .AddIdentity<AppUser, AppRole>(config =>
                 {
                     config.Password.RequireDigit = false;
                     config.Password.RequireLowercase = false;

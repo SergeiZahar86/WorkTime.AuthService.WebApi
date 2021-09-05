@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WorkTime.AuthSerice.Data.Models;
 using WorkTime.AuthService.WebApi.AppStart;
 using WorkTime.AuthService.WebApi.Infrastructure;
 
@@ -24,7 +25,8 @@ namespace WorkTime.AuthService.WebApi.AppStart.ConfigureServices
             services.AddAuthorization();
 
             services.AddIdentityServer()
-                .AddAspNetIdentity<IdentityUser>()
+                //.AddAspNetIdentity<IdentityUser>()
+                .AddAspNetIdentity<AppUser>()
                 .AddInMemoryClients(IdentityServerConfiguration.GetClients())
                 .AddInMemoryApiResources(IdentityServerConfiguration.GetApiResources())
                 .AddInMemoryIdentityResources(IdentityServerConfiguration.GetIdentityResources())

@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using WorkTime.AuthSerice.Data.Models;
 using WorkTime.AuthService.WebApi;
 using WorkTime.AuthService.WebApi.Account;
 
@@ -24,16 +25,39 @@ namespace Authorization.IdentityServer.Account
     [AllowAnonymous]
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        //private readonly UserManager<IdentityUser> _userManager;
+        //private readonly SignInManager<IdentityUser> _signInManager;
+        //private readonly IIdentityServerInteractionService _interaction;
+        //private readonly IClientStore _clientStore;
+        //private readonly IAuthenticationSchemeProvider _schemeProvider;
+        //private readonly IEventService _events;
+
+        //public AccountController(
+        //    UserManager<IdentityUser> userManager,
+        //    SignInManager<IdentityUser> signInManager,
+        //    IIdentityServerInteractionService interaction,
+        //    IClientStore clientStore,
+        //    IAuthenticationSchemeProvider schemeProvider,
+        //    IEventService events)
+        //{
+        //    _userManager = userManager;
+        //    _signInManager = signInManager;
+        //    _interaction = interaction;
+        //    _clientStore = clientStore;
+        //    _schemeProvider = schemeProvider;
+        //    _events = events;
+        //}
+
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IClientStore _clientStore;
         private readonly IAuthenticationSchemeProvider _schemeProvider;
         private readonly IEventService _events;
 
         public AccountController(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<AppUser> userManager,
+            SignInManager<AppUser> signInManager,
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
             IAuthenticationSchemeProvider schemeProvider,
@@ -46,6 +70,9 @@ namespace Authorization.IdentityServer.Account
             _schemeProvider = schemeProvider;
             _events = events;
         }
+
+
+
 
         /// <summary>
         /// Entry point into the login workflow
@@ -109,7 +136,7 @@ namespace Authorization.IdentityServer.Account
                 if (result.Succeeded)
                 {
                     var user = await _userManager.FindByNameAsync(model.Username);
-                    await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id, user.UserName, clientId: context?.Client.ClientId));
+                    await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id.ToString(), user.UserName, clientId: context?.Client.ClientId));
 
                     if (context != null)
                     {

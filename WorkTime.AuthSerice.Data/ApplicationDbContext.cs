@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
+using WorkTime.AuthSerice.Data.Configuration;
+using WorkTime.AuthSerice.Data.Models;
 
 namespace WorkTime.AuthSerice.Data
 {
-    //public class ApplicationDbContext: IdentityDbContext<AppUser, AppRole, Guid>
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext: IdentityDbContext<AppUser, AppRole, Guid>
+    //public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
@@ -14,35 +16,38 @@ namespace WorkTime.AuthSerice.Data
 
         }
 
-        //protected override void OnModelCreating(ModelBuilder builder)
-        //{
-        //    base.OnModelCreating(builder);
+        public DbSet<WorkTimes> WorkTimes { get; set; }
 
-        //    builder.Entity<AppUser>(entity =>
-        //    entity.ToTable(name: "Users"));
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
 
-        //    //builder.Entity<AppRole>(entity =>
-        //    //entity.ToTable(name: "Roles"));
-        //    builder.Entity<IdentityRole>(entity =>
-        //    entity.ToTable(name: "Roles"));
+            builder.Entity<AppUser>(entity =>
+            entity.ToTable(name: "Users"));
 
-        //    builder.Entity<IdentityUserRole<Guid>>(entity =>
-        //        entity.ToTable(name: "UserRoles"));
+            //builder.Entity<AppRole>(entity =>
+            //entity.ToTable(name: "Roles"));
+            builder.Entity<AppRole>(entity =>
+            entity.ToTable(name: "Roles"));
 
-        //    builder.Entity<IdentityUserClaim<Guid>>(entity =>
-        //        entity.ToTable(name: "UserClaim"));
+            builder.Entity<IdentityUserRole<Guid>>(entity =>
+                entity.ToTable(name: "UserRoles"));
 
-        //    builder.Entity<IdentityUserLogin<Guid>>(entity =>
-        //        entity.ToTable("UserLogins"));
+            builder.Entity<IdentityUserClaim<Guid>>(entity =>
+                entity.ToTable(name: "UserClaim"));
 
-        //    builder.Entity<IdentityUserToken<Guid>>(entity =>
-        //        entity.ToTable("UserTokens"));
+            builder.Entity<IdentityUserLogin<Guid>>(entity =>
+                entity.ToTable("UserLogins"));
 
-        //    builder.Entity<IdentityRoleClaim<Guid>>(entity =>
-        //        entity.ToTable("RoleClaims"));
+            builder.Entity<IdentityUserToken<Guid>>(entity =>
+                entity.ToTable("UserTokens"));
 
-        //    builder.ApplyConfiguration(new AppUserConfiguration());
-        //}
+            builder.Entity<IdentityRoleClaim<Guid>>(entity =>
+                entity.ToTable("RoleClaims"));
+
+            builder.ApplyConfiguration(new AppUserConfiguration());
+            builder.ApplyConfiguration(new WorkTimesConfiguration());
+        }
 
     }
 }

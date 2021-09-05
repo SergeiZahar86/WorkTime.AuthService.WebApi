@@ -7,6 +7,7 @@ using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Identity;
+using WorkTime.AuthSerice.Data.Models;
 
 namespace WorkTime.AuthService.WebApi.Infrastructure
 {
@@ -17,10 +18,10 @@ namespace WorkTime.AuthService.WebApi.Infrastructure
         /// </summary>
         /// <param name="context">The context.</param>
         /// <returns></returns>
-        private readonly IUserClaimsPrincipalFactory<IdentityUser> _claimsFactory;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IUserClaimsPrincipalFactory<AppUser> _claimsFactory;
+        private readonly UserManager<AppUser> _userManager;
 
-        public ProfileService(UserManager<IdentityUser> userManager, IUserClaimsPrincipalFactory<IdentityUser> claimsFactory)
+        public ProfileService(UserManager<AppUser> userManager, IUserClaimsPrincipalFactory<AppUser> claimsFactory)
         {
             _userManager = userManager;
             _claimsFactory = claimsFactory;
