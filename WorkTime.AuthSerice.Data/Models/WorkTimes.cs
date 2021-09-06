@@ -8,8 +8,8 @@ namespace WorkTime.AuthSerice.Data.Models
     {
         public Guid Id { get; set; }
         [Required]
-        public string StartTime { get; set; }
-        public string EndTime { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
         [Required]
         public AppUser User { get; set; }
     }

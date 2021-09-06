@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WorkTime.AuthSerice.Data.Models
 {
@@ -8,6 +10,7 @@ namespace WorkTime.AuthSerice.Data.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public int TabelNumber { get; set; }
         public List<WorkTimes> WorkTimeList { get; set; }
     }
 }

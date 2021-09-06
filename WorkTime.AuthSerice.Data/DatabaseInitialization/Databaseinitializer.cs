@@ -68,7 +68,7 @@ namespace WorkTime.AuthSerice.Data.DatabaseInitialization
                 WorkTimes workTimes = new WorkTimes
                 {
                     User = employee,
-                    StartTime = DateTime.Now.ToShortTimeString()
+                    StartTime = DateTime.Now
                 };
                 dbContext.WorkTimes.Add(workTimes);
                 dbContext.SaveChanges();

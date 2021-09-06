@@ -47,6 +47,7 @@ namespace WorkTime.AuthSerice.Data
 
             builder.ApplyConfiguration(new AppUserConfiguration());
             builder.ApplyConfiguration(new WorkTimesConfiguration());
+
         }
 
     }
