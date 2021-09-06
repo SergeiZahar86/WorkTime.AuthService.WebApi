@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WorkTime.AuthSerice.Data.Models
 {
-    public class WorkTimes
+    public class WorkedTimes
     {
         public Guid Id { get; set; }
         [Required]

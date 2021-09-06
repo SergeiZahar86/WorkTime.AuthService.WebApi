@@ -226,7 +226,7 @@ namespace WorkTime.AuthSerice.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("WorkTime.AuthSerice.Data.Models.WorkTimes", b =>
+            modelBuilder.Entity("WorkTime.AuthSerice.Data.Models.WorkedTimes", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -299,7 +299,7 @@ namespace WorkTime.AuthSerice.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WorkTime.AuthSerice.Data.Models.WorkTimes", b =>
+            modelBuilder.Entity("WorkTime.AuthSerice.Data.Models.WorkedTimes", b =>
                 {
                     b.HasOne("WorkTime.AuthSerice.Data.Models.AppUser", "User")
                         .WithMany("WorkTimeList")

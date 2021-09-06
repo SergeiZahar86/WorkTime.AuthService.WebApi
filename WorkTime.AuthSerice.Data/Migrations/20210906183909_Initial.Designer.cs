@@ -10,7 +10,7 @@ using WorkTime.AuthSerice.Data;
 namespace WorkTime.AuthSerice.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210905153433_Initial")]
+    [Migration("20210906183909_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -228,7 +228,7 @@ namespace WorkTime.AuthSerice.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("WorkTime.AuthSerice.Data.Models.WorkTimes", b =>
+            modelBuilder.Entity("WorkTime.AuthSerice.Data.Models.WorkedTimes", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -301,7 +301,7 @@ namespace WorkTime.AuthSerice.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WorkTime.AuthSerice.Data.Models.WorkTimes", b =>
+            modelBuilder.Entity("WorkTime.AuthSerice.Data.Models.WorkedTimes", b =>
                 {
                     b.HasOne("WorkTime.AuthSerice.Data.Models.AppUser", "User")
                         .WithMany("WorkTimeList")

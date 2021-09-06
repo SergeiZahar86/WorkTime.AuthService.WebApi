@@ -8,9 +8,9 @@ using WorkTime.AuthSerice.Data.Models;
 
 namespace WorkTime.AuthSerice.Data.Configuration
 {
-    public class WorkTimesConfiguration : IEntityTypeConfiguration<WorkTimes>
+    public class WorkTimesConfiguration : IEntityTypeConfiguration<WorkedTimes>
     {
-        public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<WorkTimes> builder)
+        public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<WorkedTimes> builder)
         {
             builder.HasKey(x => x.Id);
         }

@@ -65,7 +65,7 @@ namespace WorkTime.AuthSerice.Data.DatabaseInitialization
                     await userManager.AddToRoleAsync(employee, "Employee");
                 }
 
-                WorkTimes workTimes = new WorkTimes
+                WorkedTimes workTimes = new WorkedTimes
                 {
                     User = employee,
                     StartTime = DateTime.Now

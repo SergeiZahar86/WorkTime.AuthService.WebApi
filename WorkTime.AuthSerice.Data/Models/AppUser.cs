@@ -11,6 +11,6 @@ namespace WorkTime.AuthSerice.Data.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int TabelNumber { get; set; }
-        public List<WorkTimes> WorkTimeList { get; set; }
+        public List<WorkedTimes> WorkTimeList { get; set; }
     }
 }
