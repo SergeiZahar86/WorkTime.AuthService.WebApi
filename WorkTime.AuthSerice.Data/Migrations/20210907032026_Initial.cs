@@ -157,7 +157,7 @@ namespace WorkTime.AuthSerice.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WorkTimes",
+                name: "WorkedTimes",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -167,9 +167,9 @@ namespace WorkTime.AuthSerice.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WorkTimes", x => x.Id);
+                    table.PrimaryKey("PK_WorkedTimes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WorkTimes_Users_UserId",
+                        name: "FK_WorkedTimes_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -216,8 +216,8 @@ namespace WorkTime.AuthSerice.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkTimes_UserId",
-                table: "WorkTimes",
+                name: "IX_WorkedTimes_UserId",
+                table: "WorkedTimes",
                 column: "UserId");
         }
 
@@ -239,7 +239,7 @@ namespace WorkTime.AuthSerice.Data.Migrations
                 name: "UserTokens");
 
             migrationBuilder.DropTable(
-                name: "WorkTimes");
+                name: "WorkedTimes");
 
             migrationBuilder.DropTable(
                 name: "Roles");

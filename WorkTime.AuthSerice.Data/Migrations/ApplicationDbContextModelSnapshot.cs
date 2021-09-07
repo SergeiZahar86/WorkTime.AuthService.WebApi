@@ -245,7 +245,7 @@ namespace WorkTime.AuthSerice.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("WorkTimes");
+                    b.ToTable("WorkedTimes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

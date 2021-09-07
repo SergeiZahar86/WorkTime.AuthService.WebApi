@@ -16,7 +16,7 @@ namespace WorkTime.AuthSerice.Data
 
         }
 
-        public DbSet<WorkedTimes> WorkTimes { get; set; }
+        public DbSet<WorkedTimes> WorkedTimes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

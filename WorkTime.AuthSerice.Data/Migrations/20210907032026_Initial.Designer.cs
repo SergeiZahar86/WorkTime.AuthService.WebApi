@@ -10,7 +10,7 @@ using WorkTime.AuthSerice.Data;
 namespace WorkTime.AuthSerice.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210906183909_Initial")]
+    [Migration("20210907032026_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -247,7 +247,7 @@ namespace WorkTime.AuthSerice.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("WorkTimes");
+                    b.ToTable("WorkedTimes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

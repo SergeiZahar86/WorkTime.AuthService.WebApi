@@ -70,7 +70,7 @@ namespace WorkTime.AuthSerice.Data.DatabaseInitialization
                     User = employee,
                     StartTime = DateTime.Now
                 };
-                dbContext.WorkTimes.Add(workTimes);
+                dbContext.WorkedTimes.Add(workTimes);
                 dbContext.SaveChanges();
             }
         }
