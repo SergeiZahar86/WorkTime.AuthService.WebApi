@@ -16,7 +16,7 @@ namespace WorkTime.AuthService.WebApi.AppStart.Configures
             app.UseStaticFiles();
 
             app.UseRouting();
-            //app.UseCors("CorsPolicy");
+            app.UseCors("CorsPolicy");
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseIdentityServer();

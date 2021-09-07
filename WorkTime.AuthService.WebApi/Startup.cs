@@ -28,7 +28,7 @@ namespace WorkTime.AuthService.WebApi
             ConfigureServicesBase.ConfigureServices(services, Configuration);
             ConfigureServicesAuthentication.ConfigureServices(services, Configuration);
             //ConfigureServicesSwagger.ConfigureServices(services, Configuration);
-            //ConfigureServicesCors.ConfigureServices(services);
+            ConfigureServicesCors.ConfigureServices(services);
             ConfigureServicesControllers.ConfigureServices(services);
 
 
